@@ -31,15 +31,15 @@ steps:
   - rm -rf /app/build/admin
   - cp -rf dist /app/build/admin
 - name: ssh commands
-    image: appleboy/drone-ssh
-    settings:
-      host: 1.14.68.222
-      username: ubuntu
-      port: 22
-      key:
-        from_secret: ssh_key
-  script:
-  - sudo bash /home/ubuntu/projects/restart.sh
+  image: appleboy/drone-ssh
+  settings:
+    host: 1.14.68.222
+    username: ubuntu
+    port: 22
+    key:
+      from_secret: ssh_key
+    script:
+    - sudo bash /home/ubuntu/projects/restart.sh
 volumes:
 - name: build
   host:
