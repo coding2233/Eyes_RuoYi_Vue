@@ -20,8 +20,8 @@ steps:
   environment:
     TZ: Asia/Shanghai
   volumes:
-  - name: cache
-    path: /drone/src/node_modules
+  - name: npm-cache
+    path: /drone/src/ruoyi-ui/node_modules
   - name: build
     path: /app/build
   commands:
