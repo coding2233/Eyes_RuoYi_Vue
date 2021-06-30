@@ -8,16 +8,31 @@ steps:
   volumes:
   - name: maven-cache
     path: /root/.m2
-  - name: maven-build
+  - name: build
     path: /app/build
   commands:
   - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - cp ruoyi-admin/target/ruoyi-admin.jar /app/build/ruoyi-admin.jar
-
+  - cp -rf ruoyi-admin/target/ruoyi-admin.jar /app/build
+- name: build
+  image: node
+  volumes:
+  - name: cache
+    path: /drone/src/node_modules
+  - name: build
+    path: /app/build
+  commands:
+  - cd ruoyi-ui/
+  - npm install
+  - npm run build:prod
+  - rm -rf /app/build/dist
+  - cp -rf dist /app/build/dist
 volumes:
-- name: maven-build
+- name: build
   host:
     path: /home/ubuntu/build
 - name: maven-cache
   host:
     path: /home/ubuntu/.m2
+- name: npm-cache
+  host:
+    path: /home/ubuntu/cache/node_modules
