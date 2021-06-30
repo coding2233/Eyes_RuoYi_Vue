@@ -1,0 +1,23 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: package
+  image: maven:3-jdk-8
+  volumes:
+  - name: maven-cache
+    path: /root/.m2
+  - name: maven-build
+    path: /app/build
+  commands:
+  - mvn clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+  - cp ruoyi-admin/target/ruoyi-admin.jar /app/build/ruoyi-admin.jar
+
+volumes:
+- name: maven-build
+  host:
+    path: /home/ubuntu/build
+- name: maven-cache
+  host:
+    path: /home/ubuntu/.m2
