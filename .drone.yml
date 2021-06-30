@@ -5,6 +5,8 @@ name: default
 steps:
 - name: package
   image: maven:3-jdk-8
+  environment:
+    TZ: Asia/Shanghai
   volumes:
   - name: maven-cache
     path: /root/.m2
@@ -15,6 +17,8 @@ steps:
   - cp -rf ruoyi-admin/target/ruoyi-admin.jar /app/build
 - name: build
   image: node
+  environment:
+    TZ: Asia/Shanghai
   volumes:
   - name: cache
     path: /drone/src/node_modules
