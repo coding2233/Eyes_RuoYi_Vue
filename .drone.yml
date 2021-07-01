@@ -49,4 +49,4 @@ volumes:
     path: /home/ubuntu/.m2
 - name: npm-cache
   host:
-    path: /home/ubuntu/cache/node_modules
+    path: /home/ubuntu/cache/admin/node_modules
