@@ -1,5 +1,5 @@
 module.exports = {
-  title: '若依管理系统',
+  title: '眼病管理系统',
 
   /**
    * 侧边栏主题 深色主题theme-dark，浅色主题theme-light
@@ -29,7 +29,7 @@ module.exports = {
   /**
    * 是否显示logo
    */
-  sidebarLogo: true,
+  sidebarLogo: false,
 
   /**
    * @type {string | array} 'production' | ['production', 'development']
