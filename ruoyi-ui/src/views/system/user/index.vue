@@ -2,9 +2,31 @@
   <div class="app-container">
     <el-row :gutter="20">
       <!--部门数据-->
-
+      <el-col :span="4" :xs="24">
+        <div class="head-container">
+          <el-input
+            v-model="deptName"
+            placeholder="请输入部门名称"
+            clearable
+            size="small"
+            prefix-icon="el-icon-search"
+            style="margin-bottom: 20px"
+          />
+        </div>
+        <div class="head-container">
+          <el-tree
+            :data="deptOptions"
+            :props="defaultProps"
+            :expand-on-click-node="false"
+            :filter-node-method="filterNode"
+            ref="tree"
+            default-expand-all
+            @node-click="handleNodeClick"
+          />
+        </div>
+      </el-col>
       <!--用户数据-->
-      <el-col :span="24" :xs="24">
+      <el-col :span="20" :xs="24">
         <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
           <el-form-item label="用户名称" prop="userName">
             <el-input
@@ -134,31 +156,25 @@
               ></el-switch>
             </template>
           </el-table-column>
+          <el-table-column label="创建时间" align="center" prop="createTime" v-if="columns[6].visible" width="160">
+            <template slot-scope="scope">
+              <span>{{ parseTime(scope.row.createTime) }}</span>
+            </template>
+          </el-table-column>
           <el-table-column
             label="操作"
             align="center"
-            width="350"
+            width="160"
             class-name="small-padding fixed-width"
           >
             <template slot-scope="scope">
               <el-button
                 size="mini"
                 type="text"
-                icon="el-icon-info"
-                @click="handleUpdate(scope.row)"
-              >详情</el-button>
-              <el-button
-                size="mini"
-                type="text"
-                icon="el-icon-eleme"
-                @click="handleRecord(scope.row)"
-              >眼压数据</el-button>
-              <el-button
-                size="mini"
-                type="text"
                 icon="el-icon-edit"
-                @click="handleMethod(scope.row)"
-              >就诊记录</el-button>
+                @click="handleUpdate(scope.row)"
+                v-hasPermi="['system:user:edit']"
+              >修改</el-button>
               <el-button
                 v-if="scope.row.userId !== 1"
                 size="mini"
@@ -571,14 +587,6 @@ export default {
         this.title = "修改用户";
         this.form.password = "";
       });
-    },
-    handleRecord(row){
-        console.log(row);
-      this.$router.push({path:'/system/record', query:{userId: row.userId}})
-    },
-    handleMethod(row){
-      console.log(row);
-      this.$router.push({path:'/system/method', query:{userId: row.userId}})
     },
     /** 重置密码按钮操作 */
     handleResetPwd(row) {
