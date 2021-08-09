@@ -42,3 +42,7 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+
+
+ruoyi-vue-docker/jar/*.jar
+ruoyi-vue-docker/html/dist/
