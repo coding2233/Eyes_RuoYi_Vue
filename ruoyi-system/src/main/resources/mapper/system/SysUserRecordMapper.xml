@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.system.mapper.SysUserRecordMapper">
-    
+
     <resultMap type="SysUserRecord" id="SysUserRecordResult">
         <result property="recordId"    column="record_id"    />
         <result property="userId"    column="user_id"    />
@@ -15,15 +15,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="medication"    column="medication"    />
         <result property="emotion"    column="emotion"    />
         <result property="motion"    column="motion"    />
+        <result property="visiontype"    column="visionType"    />
+        <result property="pressureTime"    column="pressure_time"    />
+        <result property="motionDuration"    column="motion_duration"    />
+        <result property="motionRemark"    column="motion_remark"    />
+        <result property="medicationMoment"    column="medication_moment"    />
+        <result property="medicationAdr"    column="medication_adr"    />
+        <result property="medicationSuspend"    column="medication_suspend"    />
+        <result property="medicationRemark"    column="medication_remark"    />
     </resultMap>
 
     <sql id="selectSysUserRecordVo">
-        select record_id, user_id, vision_left, vision_right, pressure_left, pressure_right, record_time, medication, emotion, motion from sys_user_record
+        select record_id, user_id, vision_left, vision_right, pressure_left, pressure_right, record_time, medication, emotion, motion, visionType, pressure_time, motion_duration, motion_remark, medication_moment, medication_adr, medication_suspend, medication_remark from sys_user_record
     </sql>
 
     <select id="selectSysUserRecordList" parameterType="SysUserRecord" resultMap="SysUserRecordResult">
         <include refid="selectSysUserRecordVo"/>
-        <where>  
+        <where>
             <if test="userId != null "> and user_id = #{userId}</if>
             <if test="visionLeft != null "> and vision_left = #{visionLeft}</if>
             <if test="visionRight != null "> and vision_right = #{visionRight}</if>
@@ -33,15 +41,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="medication != null  and medication != ''"> and medication = #{medication}</if>
             <if test="emotion != null  and emotion != ''"> and emotion = #{emotion}</if>
             <if test="motion != null  and motion != ''"> and motion = #{motion}</if>
+            <if test="visiontype != null "> and visionType = #{visiontype}</if>
+            <if test="pressureTime != null "> and pressure_time = #{pressureTime}</if>
+            <if test="motionDuration != null "> and motion_duration = #{motionDuration}</if>
+            <if test="motionRemark != null  and motionRemark != ''"> and motion_remark = #{motionRemark}</if>
+            <if test="medicationMoment != null  and medicationMoment != ''"> and medication_moment = #{medicationMoment}</if>
+            <if test="medicationAdr != null  and medicationAdr != ''"> and medication_adr = #{medicationAdr}</if>
+            <if test="medicationSuspend != null "> and medication_suspend = #{medicationSuspend}</if>
+            <if test="medicationRemark != null  and medicationRemark != ''"> and medication_remark = #{medicationRemark}</if>
         </where>
-        ORDER BY record_time
     </select>
-    
+
     <select id="selectSysUserRecordById" parameterType="Long" resultMap="SysUserRecordResult">
         <include refid="selectSysUserRecordVo"/>
         where record_id = #{recordId}
     </select>
-        
+
     <insert id="insertSysUserRecord" parameterType="SysUserRecord" useGeneratedKeys="true" keyProperty="recordId">
         insert into sys_user_record
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -54,7 +69,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="medication != null">medication,</if>
             <if test="emotion != null">emotion,</if>
             <if test="motion != null">motion,</if>
-         </trim>
+            <if test="visiontype != null">visionType,</if>
+            <if test="pressureTime != null">pressure_time,</if>
+            <if test="motionDuration != null">motion_duration,</if>
+            <if test="motionRemark != null">motion_remark,</if>
+            <if test="medicationMoment != null">medication_moment,</if>
+            <if test="medicationAdr != null">medication_adr,</if>
+            <if test="medicationSuspend != null">medication_suspend,</if>
+            <if test="medicationRemark != null">medication_remark,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="userId != null">#{userId},</if>
             <if test="visionLeft != null">#{visionLeft},</if>
@@ -65,7 +88,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="medication != null">#{medication},</if>
             <if test="emotion != null">#{emotion},</if>
             <if test="motion != null">#{motion},</if>
-         </trim>
+            <if test="visiontype != null">#{visiontype},</if>
+            <if test="pressureTime != null">#{pressureTime},</if>
+            <if test="motionDuration != null">#{motionDuration},</if>
+            <if test="motionRemark != null">#{motionRemark},</if>
+            <if test="medicationMoment != null">#{medicationMoment},</if>
+            <if test="medicationAdr != null">#{medicationAdr},</if>
+            <if test="medicationSuspend != null">#{medicationSuspend},</if>
+            <if test="medicationRemark != null">#{medicationRemark},</if>
+        </trim>
     </insert>
 
     <update id="updateSysUserRecord" parameterType="SysUserRecord">
@@ -80,6 +111,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="medication != null">medication = #{medication},</if>
             <if test="emotion != null">emotion = #{emotion},</if>
             <if test="motion != null">motion = #{motion},</if>
+            <if test="visiontype != null">visionType = #{visiontype},</if>
+            <if test="pressureTime != null">pressure_time = #{pressureTime},</if>
+            <if test="motionDuration != null">motion_duration = #{motionDuration},</if>
+            <if test="motionRemark != null">motion_remark = #{motionRemark},</if>
+            <if test="medicationMoment != null">medication_moment = #{medicationMoment},</if>
+            <if test="medicationAdr != null">medication_adr = #{medicationAdr},</if>
+            <if test="medicationSuspend != null">medication_suspend = #{medicationSuspend},</if>
+            <if test="medicationRemark != null">medication_remark = #{medicationRemark},</if>
         </trim>
         where record_id = #{recordId}
     </update>
@@ -89,7 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteSysUserRecordByIds" parameterType="String">
-        delete from sys_user_record where record_id in 
+        delete from sys_user_record where record_id in
         <foreach item="recordId" collection="array" open="(" separator="," close=")">
             #{recordId}
         </foreach>
