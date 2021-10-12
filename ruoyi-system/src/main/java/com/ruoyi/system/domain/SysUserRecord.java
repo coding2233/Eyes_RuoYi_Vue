@@ -60,7 +60,7 @@ public class SysUserRecord extends BaseEntity
 
     /** $column.columnComment */
     @Excel(name = "情绪状况")
-    private Long visiontype;
+    private String visiontype;
 
     /** 眼压测量的具体时刻 */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm")
@@ -182,12 +182,12 @@ public class SysUserRecord extends BaseEntity
     {
         return motion;
     }
-    public void setVisiontype(Long visiontype)
+    public void setVisiontype(String visiontype)
     {
         this.visiontype = visiontype;
     }
 
-    public Long getVisiontype()
+    public String getVisiontype()
     {
         return visiontype;
     }
