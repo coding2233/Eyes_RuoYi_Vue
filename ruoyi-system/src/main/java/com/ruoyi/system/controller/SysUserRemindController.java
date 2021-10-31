@@ -22,7 +22,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 提醒信息Controller
- * 
+ *
  * @author ruoyi
  * @date 2021-06-13
  */
@@ -100,7 +100,7 @@ public class SysUserRemindController extends BaseController
      * 删除提醒信息
      */
     @Log(title = "提醒信息", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{remindIds}")
+    @DeleteMapping("/{remindIds}")
     public AjaxResult remove(@PathVariable Long[] remindIds)
     {
         return toAjax(sysUserRemindService.deleteSysUserRemindByIds(remindIds));
