@@ -75,6 +75,18 @@ public class SysUserInfo extends BaseEntity
     @Excel(name = "性别")
     private String sex;
 
+    /** 所在城市 */
+    @Excel(name = "所在城市")
+    private String city;
+
+    /** 青光眼类型 */
+    @Excel(name = "青光眼类型")
+    private String eyesType;
+
+    /** 房角 */
+    @Excel(name = "房角")
+    private String corner;
+
     public void setUserId(Long userId)
     {
         this.userId = userId;
@@ -202,6 +214,15 @@ public class SysUserInfo extends BaseEntity
         return sex;
     }
 
+    public void setCity(String city) {this.city=city;}
+    public  String getCity() {return  this.city;}
+
+    public void setEyesType(String eyesType) {this.eyesType=eyesType;}
+    public  String getEyesType() {return  this.eyesType;}
+
+    public void setCorner(String corner) {this.corner=corner;}
+    public  String getCorner() {return  this.corner;}
+
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
@@ -219,6 +240,9 @@ public class SysUserInfo extends BaseEntity
                 .append("nickName", getNickName())
                 .append("avatar", getAvatar())
                 .append("sex", getSex())
+                .append("city", getCity())
+                .append("eyesType", getEyesType())
+                .append("corner", getCorner())
                 .toString();
     }
 }
